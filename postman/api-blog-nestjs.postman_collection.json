@@ -11,10 +11,20 @@
 				{
 					"name": "Get All Users",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo1LCJuYW1lIjoiYXBpcEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImFwcCIsImVtYWlsIjoiYXBpcEBnbWFpbC5jb20iLCJyb2xlIjoidXNlciJ9LCJpYXQiOjE2NzYxMTE2NDMsImV4cCI6MTY3NjExNTI0M30.k-islJfi-6B6GUU0QYzRj7Km_puX_--ZUAfwtH9Atlo",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/users",
+							"raw": "http://localhost:3000/users?page=1&limit=10",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -22,6 +32,17 @@
 							"port": "3000",
 							"path": [
 								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Pagination"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
 							]
 						}
 					},
@@ -34,7 +55,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Apip\",\r\n    \"username\": \"app\",\r\n    \"email\": \"apip@gmail.com\",\r\n    \"password\": \"Bismillah\"\r\n}",
+							"raw": "{\r\n    \"name\": \"User5\",\r\n    \"username\": \"user5\",\r\n    \"email\": \"user5@gmail.com\",\r\n    \"password\": \"Bismillah@1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -127,11 +148,21 @@
 				{
 					"name": "Login",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo1LCJuYW1lIjoiYXBpcEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImFwcCIsImVtYWlsIjoiYXBpcEBnbWFpbC5jb20ifSwiaWF0IjoxNjc2MTEwMjAyLCJleHAiOjE2NzYxMTM4MDJ9.Clp76KoglS8t0j0Ecpc3hXFvLij9gw-cJU6zo3RMs3k",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Apip\",\r\n    \"username\": \"app\",\r\n    \"email\": \"apip@gmail.com\",\r\n    \"password\": \"Bismillah\"\r\n}",
+							"raw": "{\r\n    \"email\": \"apip@gmail.com\",\r\n    \"password\": \"Bismillah\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -148,6 +179,36 @@
 							"path": [
 								"users",
 								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Role (Protected JWT and Role)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"role\": \"editor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/5/role",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"5",
+								"role"
 							]
 						}
 					},
