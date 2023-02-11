@@ -34,7 +34,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Apip\",\r\n    \"username\": \"app\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Apip\",\r\n    \"username\": \"app\",\r\n    \"email\": \"apip@gmail.com\",\r\n    \"password\": \"Bismillah\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -61,7 +61,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/users/3",
+							"raw": "http://localhost:3000/users/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -69,7 +69,7 @@
 							"port": "3000",
 							"path": [
 								"users",
-								"3"
+								"5"
 							]
 						}
 					},
@@ -119,6 +119,35 @@
 							"path": [
 								"users",
 								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Apip\",\r\n    \"username\": \"app\",\r\n    \"email\": \"apip@gmail.com\",\r\n    \"password\": \"Bismillah\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"login"
 							]
 						}
 					},
