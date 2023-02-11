@@ -7,9 +7,13 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { catchError, map, Observable, of } from 'rxjs';
-import { User } from 'src/user/models/user.interface';
+import { hasRoles } from 'src/auth/service/auth/decorator/roles.decorator';
+import { JwtAuthGuard } from 'src/auth/service/auth/guard/jwt-guard';
+import { RolesGuard } from 'src/auth/service/auth/guard/roles.guard';
+import { User, UserRole } from 'src/user/models/user.interface';
 import { UserService } from 'src/user/service/user/user.service';
 
 @Controller('users')
@@ -54,5 +58,15 @@ export class UserController {
     @Body() user: User,
   ): Observable<any> {
     return this.userService.updateOne(id, user);
+  }
+
+  @hasRoles(UserRole.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Put(':id/:role')
+  updateRoleOfUser(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() user: User,
+  ): Observable<User> {
+    return this.userService.updateRoleOfUser(id, user);
   }
 }
