@@ -24,7 +24,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/users?page=1&limit=10",
+							"raw": "http://localhost:3000/users?username=&page=1&limit=5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -35,13 +35,16 @@
 							],
 							"query": [
 								{
+									"key": "username",
+									"value": ""
+								},
+								{
 									"key": "page",
-									"value": "1",
-									"description": "Pagination"
+									"value": "1"
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "5"
 								}
 							]
 						}
@@ -185,9 +188,67 @@
 					"response": []
 				},
 				{
-					"name": "Update Role (Protected JWT and Role)",
+					"name": "Upload File",
 					"request": {
-						"method": "PUT",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo1LCJuYW1lIjoiQXBpcCIsInVzZXJuYW1lIjoiYXBwIiwiZW1haWwiOiJhcGlwQGdtYWlsLmNvbSIsInJvbGUiOiJlZGl0b3IifSwiaWF0IjoxNjc2MTkzNDUxLCJleHAiOjE2NzYxOTcwNTF9.gILINnmfQuBnMtwn8vRoZOeTNAtTSUlhJt6iThNVHDI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/D:/apip.jpg"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/upload",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Image Profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo1LCJuYW1lIjoiQXBpcCIsInVzZXJuYW1lIjoiYXBwIiwiZW1haWwiOiJhcGlwQGdtYWlsLmNvbSIsInJvbGUiOiJlZGl0b3IifSwiaWF0IjoxNjc2MTkzNDUxLCJleHAiOjE2NzYxOTcwNTF9.gILINnmfQuBnMtwn8vRoZOeTNAtTSUlhJt6iThNVHDI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -199,7 +260,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/users/5/role",
+							"raw": "http://localhost:3000/users/profile-image/apip56e61837-b16a-447a-9f77-2f44e4a8845d.jpg",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -207,8 +268,8 @@
 							"port": "3000",
 							"path": [
 								"users",
-								"5",
-								"role"
+								"profile-image",
+								"apip56e61837-b16a-447a-9f77-2f44e4a8845d.jpg"
 							]
 						}
 					},
