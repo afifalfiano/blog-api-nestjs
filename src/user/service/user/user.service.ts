@@ -43,7 +43,7 @@ export class UserService {
     return from(this.userRepository.findOne({ where: { id } })).pipe(
       map((user: User) => {
         const { password, ...result } = user;
-        return result;
+        return user;
       }),
       catchError((err) => throwError(err)),
     );
@@ -70,8 +70,8 @@ export class UserService {
     delete user.password;
     delete user.role;
     return from(this.userRepository.update({ id }, { ...user })).pipe(
-      switchMap(()=> this.findOne(id))
-    )
+      switchMap(() => this.findOne(id)),
+    );
   }
 
   login(user: User): Observable<string> {
@@ -101,7 +101,6 @@ export class UserService {
     options: IPaginationOptions,
     username: string,
   ): Observable<Pagination<User>> {
-    console.log(username, 'uname');
     return from(
       this.userRepository.findAndCount({
         skip: Number(options.page) * Number(options.limit) || 0,

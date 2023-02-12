@@ -27,6 +27,7 @@ import { diskStorage } from 'multer';
 import { v4 as uuidv4 } from 'uuid';
 import path = require('path');
 import { join } from 'path';
+import { UserIsUser } from 'src/auth/service/auth/guard/user-is-user.guard';
 
 const storage = {
   storage: diskStorage({
@@ -101,6 +102,7 @@ export class UserController {
     return this.userService.delete(id);
   }
 
+  @UseGuards(JwtAuthGuard, UserIsUser)
   @Put(':id')
   updateOne(
     @Param('id', ParseIntPipe) id: number,
