@@ -21,26 +21,26 @@ export class BlogEntryEntity {
     body: string;
 
     @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
-    created: Date;
+    createdAt: Date;
 
     @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
-    updated: Date;
+    updatedAt: Date;
 
     @BeforeUpdate()
     updateTimestamp() {
-        this.updated = new Date();
+        this.updatedAt = new Date();
     }
 
     @Column({default: 0})
     likes: number;
 
-    @Column()
+    @Column({nullable: true})
     headerImage: string;
 
-    @Column()
+    @Column({nullable: true})
     publishedDate: Date;
 
-    @Column()
+    @Column({nullable: true})
     isPublished: boolean;
 
     
