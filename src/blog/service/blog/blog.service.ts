@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { from, Observable, of, switchMap } from 'rxjs';
+import { from, Observable, of, switchMap, tap } from 'rxjs';
 import { BlogEntryEntity } from 'src/blog/model/blog-entry.entity';
 import { BlogEntry } from 'src/blog/model/blog-entry.interface';
 import { User } from 'src/user/models/user.interface';
@@ -48,7 +48,17 @@ export class BlogService {
     );
   }
 
+  updateOne(id: number, blogEntry: BlogEntry): Observable<any> {
+    return from(this.blogRespository.update({ id }, { ...blogEntry })).pipe(
+      switchMap(() => this.findOne(id)),
+    );
+  }
+
   generateSlug(title: string): Observable<string> {
     return of(title.toLowerCase().replace(/ /g, '-'));
+  }
+
+  deleteOne(id: number): Observable<any> {
+    return from(this.blogRespository.delete(id));
   }
 }

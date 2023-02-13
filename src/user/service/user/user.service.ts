@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from 'src/user/models/user.entity';
 import { User, UserRole } from 'src/user/models/user.interface';
 import { Like, Repository } from 'typeorm';
-import { from, Observable, switchMap, map, catchError, throwError } from 'rxjs';
+import { from, Observable, switchMap, map, catchError, throwError, tap } from 'rxjs';
 import { AuthService } from 'src/auth/service/auth/auth.service';
 import {
   paginate,
@@ -75,12 +75,16 @@ export class UserService {
   }
 
   login(user: User): Observable<string> {
+    console.log(user, 'user');
     return this.validateUser(user.email, user.password).pipe(
       switchMap((user: User) => {
         if (user) {
           return this.authService
             .generateJWT(user)
-            .pipe(map((jwt: string) => jwt));
+            .pipe(
+              tap(() => 'taping'),
+              map((jwt: string) => jwt),
+              );
         } else {
           return 'Wrong Credentials';
         }
